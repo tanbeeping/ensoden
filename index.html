@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>enso den</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/faviconfavicon-16x16.png">
+    <link rel="manifest" href="img/favicon/site.webmanifest">
+
+    <style>
+        @property --angle {
+          syntax: '<angle>';
+          initial-value: 0deg;
+          inherits: false;
+        }
+
+        :root {
+            --parchment: #f4f1ea;
+            --ink: #1a1a1a;
+        }
+
+        body, html {
+            margin: 0; padding: 0; height: 100%;
+            display: flex; flex-direction: column;
+            background-color: var(--parchment);
+            background-image: url('img/bg-paper.png');
+            font-family: "Georgia", serif;
+            color: var(--ink);
+            overflow: hidden;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .enso-container {
+            position: relative;
+            width: 80vw;
+            max-width: 500px;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .enso-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            
+            -webkit-mask-image: conic-gradient(
+                from 90deg,
+                black 0deg, 
+                black var(--angle), 
+                transparent calc(var(--angle) + 12deg)
+            );
+            mask-image: conic-gradient(
+                from 90deg,
+                black 0deg, 
+                black var(--angle), 
+                transparent calc(var(--angle) + 12deg)
+            );
+            
+            /* Total duration increased to 11s */
+            animation: drawEnso 11s ease-in-out infinite;
+        }
+
+        @keyframes drawEnso {
+            0% { --angle: 0deg; opacity: 0; }
+            4% { opacity: 1; }
+            /* The drawing finishes at roughly 45% of 11s (~5 seconds) */
+            45% { --angle: 360deg; opacity: 1; }
+            /* It stays fully drawn until 90% (~10 seconds) */
+            90% { --angle: 360deg; opacity: 1; }
+            /* Quick fade out in the last second */
+            100% { --angle: 360deg; opacity: 0; }
+        }
+
+        .title {
+            position: absolute;
+            font-size: 1.2rem;
+            letter-spacing: 0.4em;
+            text-transform: lowercase;
+            font-weight: 300;
+            opacity: 0;
+            animation: fadeIn 11s ease-in-out infinite;
+            z-index: 10;
+        }
+
+        @keyframes fadeIn {
+            /* Delay appearance until stroke is nearly done */
+            0%, 40% { opacity: 0; transform: translateY(5px); }
+            55%, 90% { opacity: 0.8; transform: translateY(0); }
+            100% { opacity: 0; }
+        }
+
+        footer {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .contact-link {
+            font-size: 0.65rem;
+            text-transform: lowercase;
+            letter-spacing: 0.2em;
+            color: var(--ink);
+            text-decoration: none;
+            opacity: 0.4;
+            transition: opacity 0.3s;
+        }
+
+        .contact-link:hover { opacity: 1; }
+    </style>
+</head>
+<body>
+
+    <main>
+        <div class="enso-container">
+            <img src="img/enso.png" alt="enso circle" class="enso-image">
+            <h1 class="title">enso den</h1>
+        </div>
+    </main>
+
+    <footer>
+        <a href="mailto:hello@tanbeeping.com" class="contact-link">contact</a>
+    </footer>
+
+</body>
+</html>
