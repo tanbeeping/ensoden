@@ -129,8 +129,24 @@
     </main>
 
     <footer>
-        <a href="mailto:hello@tanbeeping.com" class="contact-link">contact</a>
+        <a href="#" class="contact-link" id="reveal-email">contact</a>
+        <a class="contact-link" id="email" style="display:none;"></a>
     </footer>
+
+    <script>
+      document.getElementById('reveal-email').addEventListener('click', function () {
+        const user = 'hello';
+        const domain = 'tanbeeping.com';
+
+        const email = user + '@' + domain;
+        const emailSpan = document.getElementById('email');
+
+        emailSpan.innerHTML = `<a href="mailto:${email}">${email}</a>`;
+        emailSpan.style.display = 'inline';
+
+        this.style.display = 'none';
+      });
+    </script>
 
 </body>
 </html>
