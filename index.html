@@ -5,17 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>enso den</title>
 
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DT0G2Z1V8F"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-DT0G2Z1V8F');
     </script>
 
-    <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/img/faviconfavicon-16x16.png">
@@ -79,18 +76,16 @@
                 transparent calc(var(--angle) + 12deg)
             );
             
-            /* Total duration increased to 11s */
             animation: drawEnso 11s ease-in-out infinite;
         }
 
         @keyframes drawEnso {
             0% { --angle: 0deg; opacity: 0; }
             4% { opacity: 1; }
-            /* The drawing finishes at roughly 45% of 11s (~5 seconds) */
+            /* Drawing finishes at 45% (approx 5s) */
             45% { --angle: 360deg; opacity: 1; }
-            /* It stays fully drawn until 90% (~10 seconds) */
-            180% { --angle: 360deg; opacity: 1; }
-            /* Quick fade out in the last second */
+            /* FIXED: Stays fully drawn until 90% (approx 10s) */
+            90% { --angle: 360deg; opacity: 1; }
             100% { --angle: 360deg; opacity: 0; }
         }
 
@@ -106,7 +101,6 @@
         }
 
         @keyframes fadeIn {
-            /* Delay appearance until stroke is nearly done */
             0%, 40% { opacity: 0; transform: translateY(5px); }
             55%, 90% { opacity: 0.8; transform: translateY(0); }
             100% { opacity: 0; }
@@ -117,7 +111,7 @@
             text-align: center;
         }
 
-        .contact-link {
+        .contact-link, #email a {
             font-size: 0.65rem;
             text-transform: lowercase;
             letter-spacing: 0.2em;
@@ -127,7 +121,7 @@
             transition: opacity 0.3s;
         }
 
-        .contact-link:hover { opacity: 1; }
+        .contact-link:hover, #email a:hover { opacity: 1; }
     </style>
 </head>
 <body>
@@ -140,18 +134,17 @@
     </main>
 
     <footer>
-        <a href="#" class="contact-link" id="reveal-email">contact</a>
-        <a class="contact-link" id="email" style="display:none;"></a>
+        <a href="javascript:void(0)" class="contact-link" id="reveal-email">contact</a>
+        <span id="email" style="display:none;"></span>
     </footer>
 
     <script>
       document.getElementById('reveal-email').addEventListener('click', function () {
         const user = 'hello';
         const domain = 'tanbeeping.com';
-
         const email = user + '@' + domain;
+        
         const emailSpan = document.getElementById('email');
-
         emailSpan.innerHTML = `<a href="mailto:${email}">${email}</a>`;
         emailSpan.style.display = 'inline';
 
